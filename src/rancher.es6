@@ -6,7 +6,7 @@ import {info, debug, error} from './log';
 import {json} from './helpers';
 
 export default class RancherMetadataClient {
-  constructor({address = 'http://192.168.99.100:8081', prefix = '2015-07-25'} = {}) {
+  constructor({address = 'http://rancher-metadata', prefix = '2015-07-25'} = {}) {
     this.address = address;
     this.prefix = prefix;
   }
@@ -18,7 +18,7 @@ export default class RancherMetadataClient {
       const reqUrl = $url.resolve(this.address, options.url);
       debug(`requesting ${reqUrl}`);
       const res = await axios(merge(options, {
-        url: $url.resolve(this.address, options.url),
+        url: $url.resolve(this.address, options.url)
       }));
       debug(json`returned ${reqUrl}:\n${res.data}`);
       return res.data
@@ -41,6 +41,9 @@ export default class RancherMetadataClient {
       },
       responseType: 'json'
     });
+  }
+  async getAgentIp() {
+    return await this.get('self/host/agent_ip');
   }
   async getEnvironment() {
     return await this.getJson('self/stack/environment_name');

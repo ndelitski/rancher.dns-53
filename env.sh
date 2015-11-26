@@ -4,7 +4,7 @@ set -e
 
 repo=ndelitski
 
-image=rancher-dns-discovery
+image=rancher-dns-53
 
 version_default=latest
 

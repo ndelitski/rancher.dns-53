@@ -1,0 +1,14 @@
+cache:
+  mount:
+    - .git
+publish:
+  docker:
+    when:
+      event: tag
+    username: ndelitski
+    password: $$DOCKER_PASSWORD
+    email: ndelitski@gmail.com
+    repo: ndelitski/dns-53
+    tag:
+      - latest
+      - $$TAG

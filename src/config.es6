@@ -30,6 +30,8 @@ async function envSource() {
   const {
     DNS_INTERVAL,
     DNS_HOSTZONE,
+    RANCHER_METADATA_ADDRESS,
+    RANCHER_METADATA_PREFIX,
     AWS_ACCESS_KEY,
     AWS_SECRET_KEY,
   } = process.env;
@@ -37,6 +39,10 @@ async function envSource() {
   return {
     hostZoneId: DNS_HOSTZONE,
     interval: DNS_INTERVAL || 10000,
+    rancherMetadata: {
+      address: RANCHER_METADATA_ADDRESS,
+      prefix: RANCHER_METADATA_PREFIX
+    },
     aws: {
       accessKey: AWS_ACCESS_KEY,
       secretKey: AWS_SECRET_KEY

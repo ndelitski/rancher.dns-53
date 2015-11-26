@@ -1,0 +1,8 @@
+FROM node:4.2.1
+
+#ADD . /var/app
+WORKDIR /var/app
+#RUN npm install --production --silent || (cat `find . -name 'npm*.log'`; exit $?)
+RUN apt-get update -y && apt-get install -y haproxy
+
+CMD npm start
