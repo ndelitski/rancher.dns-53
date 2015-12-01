@@ -1,6 +1,6 @@
 {
   "name": "rancher-dns-53",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Service-discovery agent for exposing all services into Route 53 dns and auto-registering to LB.",
   "main": "bin/rancher-dns-53.js",
   "scripts": {
