@@ -1,9 +1,8 @@
 import {promisifyAll} from 'bluebird';
 import {Route53} from 'aws-sdk';
-import {pairs, find, pluck, isEqual} from 'lodash';
+import {pairs, assign, find, pluck, isEqual} from 'lodash';
 import {json} from './helpers';
 import {info, debug, error} from './log';
-
 export default class Route53Client {
   constructor({hostZoneId, ttl, aws}) {
     this._hostZoneId = hostZoneId;
@@ -79,7 +78,11 @@ export default class Route53Client {
     if (request.ChangeBatch.Changes.length) {
       debug(json`sending request to Route53:\n${request}`);
       const res = await this._client.changeResourceRecordSetsAsync(request);
-      this.serverRecords = this.serverRecords.concat(addRecords).concat(changedRecords);
+      this.serverRecords = this.serverRecords.concat(addRecords);
+      for (let changedRecord of changedRecords) {
+        let rec = find(this.serverRecords, {Name: changedRecord.Name});
+        assign(rec, changedRecord);
+      }
       debug(json`response from Route53:\n${res}`);
     } else {
       debug(`no changes for Route53`);
