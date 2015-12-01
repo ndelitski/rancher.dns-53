@@ -8,7 +8,7 @@ publish:
     username: ndelitski
     password: $$DOCKER_PASSWORD
     email: ndelitski@gmail.com
-    repo: ndelitski/dns-53
+    repo: ndelitski/rancher-dns-53
     tag:
       - latest
       - $$TAG
