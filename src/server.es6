@@ -45,12 +45,14 @@ import Haproxy from './haproxy';
           domain
         });
 
-        if (!container.ports || !container.ports.length) {
-          info(`ignore ${container.stack_name}/${container.service_name}`);
+        const targetPortLabel = container.labels['io.rancher.route53.target_port'];
+
+        if (!targetPortLabel) {
+          info(`ignore ${container.stack_name}/${container.service_name} due to no 'io.rancher.route53.target_port' label`);
           continue;
         }
 
-        const containerPort = (container.ports[0]).match(/:(\d+)\/tcp/)[1];
+        const containerPort = parseInt(targetPortLabel);
         const containerIP = container.primary_ip;
         if (!services[name]) {
           services[name] = [`${containerIP}:${containerPort}`]
