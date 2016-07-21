@@ -34,11 +34,13 @@ async function envSource() {
     RANCHER_METADATA_PREFIX,
     AWS_ACCESS_KEY,
     AWS_SECRET_KEY,
+    PUBLIC_IP
   } = process.env;
 
   return {
     hostZoneId: DNS_HOSTZONE,
     interval: DNS_INTERVAL || 10000,
+    publicIP: PUBLIC_IP,
     rancherMetadata: {
       address: RANCHER_METADATA_ADDRESS,
       prefix: RANCHER_METADATA_PREFIX

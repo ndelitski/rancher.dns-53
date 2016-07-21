@@ -33,6 +33,7 @@ export default class RancherMetadataClient {
       url: `/${this.prefix}/${path.join('/')}`
     });
   }
+
   async getJson(...path) {
     return await this._request({
       url: `/${this.prefix}/${path.join('/')}`,

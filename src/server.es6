@@ -21,7 +21,7 @@ import Haproxy from './haproxy';
   const domain = (await route53.getDomain()).replace(/\.$/, '');
   const rancher = new RancherClient(config.rancherMetadata);
   const environment = await rancher.getEnvironment();
-  const publicIP = await getEC2PublicIP();
+  const publicIP = config.publicIP == 'ec2' ? await getEC2PublicIP() : config.publicIP;
   info(`Public IP is: ${publicIP}`);
   const proxy = new Haproxy();
 
